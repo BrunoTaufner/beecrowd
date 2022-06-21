@@ -1,1 +1,2 @@
-print((int(input()) * int(input())) - (int(input()) + int(input())))
+res = int(input()) * int(input()) - int(input()) * int(input())
+print('DIFERENCA =', res)
