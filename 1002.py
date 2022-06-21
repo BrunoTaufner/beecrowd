@@ -1,3 +1,2 @@
-r = float(input())
-A = 3.14159 * r**2
-print('A=','%.4f' % A)
+A = '{:.4f}'.format(3.14159 * float(input())**2)
+print(f'A={A}')
