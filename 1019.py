@@ -1,0 +1,5 @@
+N = int(input())
+hh = int(N / 3600)
+mm = int(N % 3600 / 60)
+ss = int(N % 3600 % 60)
+print(f'{hh}:{mm}:{ss}')
