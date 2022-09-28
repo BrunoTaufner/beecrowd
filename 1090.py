@@ -1,3 +1,15 @@
+def clearPilha(pilha):
+
+    return pilha
+
+
+def subtraiCartas(pilha: [], cartas: [[]]):
+    for carta in pilha:
+        
+
+    return cartas
+
+
 def verifica(cartas: [[]]):
     soma = 0
     pilha = []
@@ -5,21 +17,27 @@ def verifica(cartas: [[]]):
     while numero < len(cartas):
         formato = 0
         while formato < len(cartas[numero]):
-            if cartas[numero][formato] > 0 and (numero, formato) not in pilha:
+            if cartas[numero][formato] > 0:
                 if len(pilha) <= 1:
-                    cartas[numero][formato] -= 1
                     pilha.append((numero, formato))
+                    formato -= 1
                 elif len(pilha) == 2:
                     if (pilha[0][0] != numero and pilha[1][0] != numero
-                        and pilha[0][1] != formato and pilha[1][1] != formato) \
+                        and pilha[0][1] != formato and pilha[1][1] != formato
+                        and pilha[0][1] != pilha[1][1] and pilha[0][0] != pilha[1][0]) \
                             or (pilha[0][0] != numero and pilha[1][0] != numero
-                                and pilha[0][1] == formato and pilha[1][1] == formato) \
+                                and pilha[0][1] == formato and pilha[1][1] == formato
+                                and pilha[0][1] == pilha[1][1] and pilha[0][0] != pilha[1][0]) \
                             or (pilha[0][0] == numero and pilha[1][0] == numero
                                 and pilha[0][1] == formato and pilha[1][1] == formato):
-                        cartas[numero][formato] -= 1
                         pilha.append((numero, formato))
-                        numero -= 1
+                        formato -= 1
+                    else:
+                        cartas = subtraiCartas(pilha, cartas)
+                        pilha.clear()
+
             if len(pilha) == 3:
+                cartas = subtraiCartas(pilha, cartas)
                 pilha.clear()
                 soma += 1
                 numero = 0
