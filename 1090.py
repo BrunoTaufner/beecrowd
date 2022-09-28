@@ -1,34 +1,30 @@
-
 def verifica(cartas: [[]]):
     soma = 0
     pilha = []
-    m = 0
-    while m < len(cartas):
-        n = 0
-        while n < len(cartas[m]):
-            if cartas[m][n] >= 3:
-                cartas[m][n] -= 3
-                soma += 1
-                if cartas[m][n] >= 3:
-                    n -= 1
-            elif cartas[m][n] > 0 and (m, n) not in pilha:
+    numero = 0
+    while numero < len(cartas):
+        formato = 0
+        while formato < len(cartas[numero]):
+            if cartas[numero][formato] > 0 and (numero, formato) not in pilha:
                 if len(pilha) <= 1:
-                    cartas[m][n] -= 1
-                    pilha.append((m, n))
+                    cartas[numero][formato] -= 1
+                    pilha.append((numero, formato))
                 elif len(pilha) == 2:
-                    if pilha[0][1] != pilha[1][1] and pilha[0][0] != pilha[1][0] \
-                            and pilha[0][0] != m and pilha[1][0] != m and pilha[0][1] != n and pilha[1][1] != n:
-                        cartas[m][n] -= 1
-                        pilha.append((m, n))
-                    elif (pilha[0][1] == pilha[1][1] and pilha[0][0] != pilha[1][0]) or (pilha[0][1] != pilha[1][1] and pilha[0][0] == pilha[1][0]):
-                        cartas[m][n] -= 1
-                        pilha.append((m, n))
+                    if (pilha[0][0] != numero and pilha[1][0] != numero
+                        and pilha[0][1] != formato and pilha[1][1] != formato) \
+                            or (pilha[0][0] != numero and pilha[1][0] != numero
+                                and pilha[0][1] == formato and pilha[1][1] == formato) \
+                            or (pilha[0][0] == numero and pilha[1][0] == numero
+                                and pilha[0][1] == formato and pilha[1][1] == formato):
+                        cartas[numero][formato] -= 1
+                        pilha.append((numero, formato))
+                        numero -= 1
             if len(pilha) == 3:
                 pilha.clear()
                 soma += 1
-                m = 0
-            n += 1
-        m += 1
+                numero = 0
+            formato += 1
+        numero += 1
 
     return soma
 
